@@ -1,58 +1,82 @@
-﻿# Incoming Request Processing Workflow
+﻿# RequestHub
 
-A modular Streamlit prototype that accepts incoming requests, classifies them by type and urgency, runs a branch-specific remediation workflow, generates a draft response, and stores an audit log in SQLite.
+> **Intelligent Request Management Platform with AI-Powered Classification & Multi-Role Workflows**
 
-## Features
+An enterprise-ready Streamlit application that automates incoming customer request management through intelligent classification, dynamic routing, real-time tracking, and comprehensive analytics. Built with scalable architecture supporting multiple user roles, complete audit trails, and data-driven decision making.
 
-- Request intake form with demo samples
-- Optional OpenAI classification
-- Local fallback classifier when no API key is configured
-- Four remediation branches:
-  - Complaint
-  - General Enquiry
-  - Service Request
-  - Urgent Escalation
-- SQLite audit log
-- Dashboard with request counts by type and urgency
-- Case detail view with action summary and generated response
+![Python](https://img.shields.io/badge/Python-3.9+-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.0+-red)
+![SQLite](https://img.shields.io/badge/Database-SQLite/PostgreSQL-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-## Setup
+---
 
-Create a virtual environment:
+## 📋 Table of Contents
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Architecture](#-architecture)
+- [Usage Guide](#-usage-guide)
+- [Technology Stack](#-technology-stack)
+- [Module Overview](#-module-overview)
+- [Demo Walkthrough](#-demo-walkthrough)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
+
+---
+
+## ✨ Features
+
+### Core Functionality
+- **🤖 AI-Powered Classification** — Automatic categorization of incoming requests with intelligent priority assignment
+- **📊 Real-Time Dashboard** — Interactive analytics with color-coded priority visualization (Red=Critical, Orange=Medium, Green=Low)
+- **👥 Multi-Role Interface** — Distinct workflows for Customers, Agents, Managers, and Administrators
+- **🔄 Dynamic Workflow Engine** — Automatic case progression through stages with full decision history
+- **📝 Complete Audit Trail** — Comprehensive logging of all case modifications for compliance and accountability
+- **📥 Request Intake** — Streamlined customer portal for request submission and status tracking
+- **⚡ Agent Workspace** — Focused ticket management interface with full case context
+- **📈 Manager Console** — Team performance metrics, workload distribution, and SLA monitoring
+
+### Technical Features
+- ✓ Modular service-oriented architecture
+- ✓ Repository pattern for database abstraction
+- ✓ 40+ tracked attributes per case
+- ✓ CSV export for audit reports
+- ✓ Color-coded priority visualization
+- ✓ Real-time KPI metrics
+- ✓ Responsive UI for desktop and mobile
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.9 or higher
+- pip (Python package manager)
+- SQLite3 (included with Python)
+
+### Installation
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/YOUR_USERNAME/RequestHub.git
+cd RequestHub
+
+Create virtual environment:
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
 
 Install dependencies:
-
-```powershell
 pip install -r requirements.txt
-```
 
-Optional: create `.env` from `.env.example` and add an OpenAI API key:
+Initialize database:
+python -c "from app.database.schema import init_db; init_db()"
 
-```txt
-OPENAI_API_KEY=your_key_here
-OPENAI_MODEL=gpt-4.1-mini
-```
-
-Run the app:
-
-```powershell
+Run the application:
 streamlit run run_app.py
-```
-
-## Demo Flow
-
-1. Open the Process Request tab.
-2. Create a request.
-3. Click Process Request.
-4. Review the classification, urgency, confidence, triggered remediation steps, assigned team, follow-up timer, and draft response.
-5. Repeat for at least three request types.
-6. Open Dashboard and Case Logs to show the audit trail.
-
-## Notes
-
-The app is designed for a proof of concept. It does not send real emails, create real tickets, or notify real teams. Those actions are simulated as workflow outputs and audit log entries.
